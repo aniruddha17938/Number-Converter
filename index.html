@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number System Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Number System Converter</h1>
+    <form method="POST">
+        <input type="text" name="number" value="{{ input_value }}" placeholder="Enter number" required>
+        <select name="base">
+            <option value="2" {% if input_base == '2' %}selected{% endif %}>Binary</option>
+            <option value="8" {% if input_base == '8' %}selected{% endif %}>Octal</option>
+            <option value="10" {% if input_base == '10' %}selected{% endif %}>Decimal</option>
+            <option value="16" {% if input_base == '16' %}selected{% endif %}>Hexadecimal</option>
+        </select>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+        <div class="results">
+            <p><strong>Decimal:</strong> {{ result.decimal }}</p>
+            <p><strong>Binary:</strong> {{ result.binary }}</p>
+            <p><strong>Octal:</strong> {{ result.octal }}</p>
+            <p><strong>Hexadecimal:</strong> {{ result.hexadecimal }}</p>
+        </div>
+    {% elif input_value %}
+        <p class="error">Invalid number for selected base.</p>
+    {% endif %}
+</div>
+</body>
+</html>
